@@ -21,13 +21,13 @@ class Student extends Person {
         this.favSubjects = studAttrib.favSubjects;
     }
     listsSubjects() {
-        this.favSubjects.foreach(subject)
-            console.log(subject);
+        for (let i=0; i < this.favSubjects.length; i++)
+            console.log(this.favSubjects[i]);
     }
     PRAssignment(subject) {
         console.log(`${this.name} has submitted a PR for ${subject}`);
     }
-    sprintChallenge() {
+    sprintChallenge(subject) {
         console.log(`${this.name} has begun sprint challenge on ${subject}`);
     }
 
@@ -58,7 +58,7 @@ class ProjectManager extends Instructor {
         this.favInstructor = pmAttrib.favInstructor;
     }
     standUp(slackChannel) {
-        console.log(`${this.name} announces to ${channel}, @channel standy times!`);
+        console.log(`${this.name} announces to ${slackChannel}, @channel standy times!`);
     }
     debugsCode(studentObj, subjectStr) {
         console.log(`${this.name} debugs ${studentObj.name}'s code on ${subjectStr}`);
@@ -104,7 +104,7 @@ const stan = new ProjectManager({
     gradClassName: "WEB12",
     favInstructor: "Mr. Garrison",
 });
-const Cartman = new Student({
+const cartman = new Student({
     name: "Cartman",
     age: 11,
     location: "South Park",
@@ -112,7 +112,7 @@ const Cartman = new Student({
     className: "WEB30",
     favSubjects: ["Cooking", "Eating", "Sleeping"],
 });
-const Kenny = new Student({
+const kenny = new Student({
     name: "Kenny",
     age: 13,
     location: "South Park",
@@ -120,7 +120,7 @@ const Kenny = new Student({
     className: "WEB23",
     favSubjects: ["Home Ec", "Speech and Debate"],
 });
-const Kyle = new Student({
+const kyle = new Student({
     name: "Kyle",
     age: 12,
     location: "South Park",
@@ -132,5 +132,32 @@ const Kyle = new Student({
 
 
 // ****************** Testing ******************
+console.log("\n\n");
 
-alert("If you can read this, things are compiling.");
+// 1 or 2 levels of function inheritance.
+// Introductions all-around:
+mr_garrison.speak();
+mr_mackay.speak();
+chef.speak();
+stan.speak();
+cartman.speak();
+kenny.speak();
+kyle.speak();
+
+// Student functions
+cartman.listsSubjects();
+kenny.PRAssignment("JavaScript IV");
+kyle.sprintChallenge("React");
+
+// Instructor functions
+mr_garrison.demo("College");
+mr_mackay.grade(kyle, "HTML");
+
+// Project Manager functions
+chef.standUp("#Lunch");
+stan.debugsCode(kenny, "ReactJS");
+
+// Directly access attributes
+console.log("Stan's favorite instructor is " + stan.favInstructor);
+console.log("Mr. Mackay likes to say \"" + mr_mackay.catchPhrase + "\"");
+console.log("Cartman will graduate with " + cartman.className + ". Maybe.");
